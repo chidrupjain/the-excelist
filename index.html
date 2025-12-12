@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The Excelist | Consultancy & Education</title>
@@ -21,19 +21,608 @@
         }
       }
     </script>
-  <script type="importmap">
+    <style>
+        .section-content { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .section-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        /* Custom Range Slider */
+        input[type=range] {
+            height: 4px;
+            border-radius: 2px;
+        }
+    </style>
+<script type="importmap">
 {
   "imports": {
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "recharts": "https://esm.sh/recharts@^3.5.1",
-    "react/": "https://esm.sh/react@^19.2.3/",
     "react": "https://esm.sh/react@^19.2.3",
-    "lucide-react": "https://esm.sh/lucide-react@^0.560.0"
+    "lucide-react": "https://esm.sh/lucide-react@^0.560.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "recharts": "https://esm.sh/recharts@^3.5.1"
   }
 }
 </script>
 </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<body class="bg-white text-slate-800 font-sans flex flex-col min-h-screen">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center cursor-pointer" onclick="navigateTo('home')">
+                    <img src="logo.png" onerror="this.src='https://via.placeholder.com/40?text=TE'" alt="The Excelist" class="h-12 w-auto mr-3 object-contain"/>
+                    <div>
+                        <h1 class="text-2xl font-bold text-navy-800 tracking-tight">THE EXCELIST</h1>
+                        <p class="text-xs text-gray-500 uppercase tracking-widest">Consultancy & Education</p>
+                    </div>
+                </div>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex space-x-8">
+                    <button onclick="navigateTo('home')" class="nav-link text-sm font-medium text-navy-800 border-b-2 border-navy-800 transition-colors duration-200" data-target="home">Home</button>
+                    <button onclick="navigateTo('consultancy')" class="nav-link text-sm font-medium text-gray-600 hover:text-navy-800 transition-colors duration-200" data-target="consultancy">Consultancy</button>
+                    <button onclick="navigateTo('courses')" class="nav-link text-sm font-medium text-gray-600 hover:text-navy-800 transition-colors duration-200" data-target="courses">Key Learnings</button>
+                    <button onclick="navigateTo('calculators')" class="nav-link text-sm font-medium text-gray-600 hover:text-navy-800 transition-colors duration-200" data-target="calculators">Financial Calculators</button>
+                    <button onclick="navigateTo('about')" class="nav-link text-sm font-medium text-gray-600 hover:text-navy-800 transition-colors duration-200" data-target="about">About & Contact</button>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-gray-600 hover:text-navy-800 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <button onclick="navigateTo('home'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-50 hover:text-navy-800">Home</button>
+                <button onclick="navigateTo('consultancy'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-50 hover:text-navy-800">Consultancy</button>
+                <button onclick="navigateTo('courses'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-50 hover:text-navy-800">Key Learnings</button>
+                <button onclick="navigateTo('calculators'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-50 hover:text-navy-800">Calculators</button>
+                <button onclick="navigateTo('about'); toggleMobileMenu()" class="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-600 hover:bg-gray-50 hover:text-navy-800">About & Contact</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        
+        <!-- ================= HOME PAGE ================= -->
+        <section id="home" class="section-content active">
+            <!-- Hero -->
+            <div class="relative bg-navy-800 text-white py-20 lg:py-32 overflow-hidden">
+                <div class="absolute inset-0 z-0">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1920&q=80" alt="Corporate Meeting Room" class="w-full h-full object-cover"/>
+                    <div class="absolute inset-0 bg-navy-900 opacity-90"></div>
+                </div>
+                <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="max-w-3xl">
+                        <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">Empowering Financial Professionals with Compliance & Knowledge</h1>
+                        <p class="text-lg md:text-xl text-navy-100 mb-8 leading-relaxed">The Excelist is your trusted partner for end-to-end consultancy for Mutual Fund Distributors (MFDs) and advanced financial education. Led by industry veteran Chidrup Jain.</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="navigateTo('consultancy')" class="px-8 py-3 bg-white text-navy-800 font-semibold rounded hover:bg-navy-50 transition">Explore Services</button>
+                            <button onclick="navigateTo('courses')" class="px-8 py-3 bg-navy-900 border border-navy-700 text-white font-semibold rounded hover:bg-navy-700 transition">View Key Learnings</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Intro -->
+            <div class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center max-w-3xl mx-auto mb-16">
+                        <h2 class="text-3xl font-bold text-navy-800 mb-4">Why Choose The Excelist?</h2>
+                        <p class="text-gray-600">We bridge the gap between regulatory complexity and operational efficiency. Whether you are an established MFD or a budding financial advisor, our expertise ensures your business remains compliant and competitive.</p>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="p-6 bg-navy-50 rounded-lg text-center hover:shadow-lg transition">
+                            <div class="w-12 h-12 text-navy-800 mx-auto mb-4 flex justify-center items-center"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg></div>
+                            <h3 class="text-xl font-bold text-navy-800 mb-2">Regulatory Compliance</h3>
+                            <p class="text-gray-600 text-sm">Expert guidance on AMFI/SEBI regulations, ensuring your documentation and filings are always up to date.</p>
+                        </div>
+                        <div class="p-6 bg-navy-50 rounded-lg text-center hover:shadow-lg transition">
+                            <div class="w-12 h-12 text-navy-800 mx-auto mb-4 flex justify-center items-center"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div>
+                            <h3 class="text-xl font-bold text-navy-800 mb-2">Expert Education</h3>
+                            <p class="text-gray-600 text-sm">Deep-dive workshops and courses on wealth management, derivatives, and mutual funds personally trained by Chidrup Jain.</p>
+                        </div>
+                        <div class="p-6 bg-navy-50 rounded-lg text-center hover:shadow-lg transition">
+                            <div class="w-12 h-12 text-navy-800 mx-auto mb-4 flex justify-center items-center"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
+                            <h3 class="text-xl font-bold text-navy-800 mb-2">Operational Support</h3>
+                            <p class="text-gray-600 text-sm">Streamline your business operations with our tailored support for back-office management and audits.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Highlight -->
+            <div class="py-16 bg-gray-50">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex flex-col md:flex-row items-center gap-12">
+                        <div class="md:w-1/2">
+                            <img src="https://images.unsplash.com/photo-1600880292205-07f764e6a8e5?auto=format&fit=crop&w=800&q=80" alt="Indian Professional Consultants Meeting" class="rounded-lg shadow-xl"/>
+                        </div>
+                        <div class="md:w-1/2">
+                            <h2 class="text-3xl font-bold text-navy-800 mb-6">Comprehensive Consultancy for MFDs</h2>
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex items-start"><div class="h-6 w-6 rounded-full bg-navy-800 text-white flex items-center justify-center text-xs mt-1 mr-3">✓</div><p class="text-gray-700">End-to-end Compliance Documentation & Filing</p></li>
+                                <li class="flex items-start"><div class="h-6 w-6 rounded-full bg-navy-800 text-white flex items-center justify-center text-xs mt-1 mr-3">✓</div><p class="text-gray-700">Operational Guidance for efficient back-office management</p></li>
+                                <li class="flex items-start"><div class="h-6 w-6 rounded-full bg-navy-800 text-white flex items-center justify-center text-xs mt-1 mr-3">✓</div><p class="text-gray-700">Audit Support and Regulatory Updates</p></li>
+                            </ul>
+                            <button onclick="navigateTo('consultancy')" class="text-navy-800 font-bold border-b-2 border-navy-800 hover:text-navy-600 transition">Learn More About Our Services &rarr;</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Learning Highlight -->
+            <div class="py-16 bg-navy-800 text-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h2 class="text-3xl font-bold mb-6">Learn from a Master Trainer</h2>
+                    <p class="text-navy-100 max-w-2xl mx-auto mb-10">Chidrup Jain brings over 20 years of experience to the classroom. Our programs are designed to transform you from a distributor to a holistic wealth manager.</p>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="bg-navy-900 p-4 rounded border border-navy-700"><p class="font-semibold">Financial Planning</p></div>
+                        <div class="bg-navy-900 p-4 rounded border border-navy-700"><p class="font-semibold">Wealth Management</p></div>
+                        <div class="bg-navy-900 p-4 rounded border border-navy-700"><p class="font-semibold">Derivatives</p></div>
+                        <div class="bg-navy-900 p-4 rounded border border-navy-700"><p class="font-semibold">SME IPOs</p></div>
+                    </div>
+                    <div class="mt-10">
+                        <button onclick="navigateTo('courses')" class="bg-white text-navy-900 px-6 py-3 rounded font-bold hover:bg-gray-100 transition">Explore Key Learnings</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Testimonials -->
+            <div class="py-16 bg-white">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-3xl font-bold text-navy-800 text-center mb-12">Trusted by Professionals</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="bg-gray-50 p-8 rounded-lg border-l-4 border-navy-800">
+                            <p class="text-gray-600 italic mb-4">"The Excelist helped streamline my entire compliance process. I can now focus on my clients while Chidrup Sir's team handles the regulatory complexities."</p>
+                            <p class="font-bold text-navy-900">- Senior MFD, Jaipur</p>
+                        </div>
+                        <div class="bg-gray-50 p-8 rounded-lg border-l-4 border-navy-800">
+                            <p class="text-gray-600 italic mb-4">"Attending the wealth management workshop was a game changer. The practical insights into SME IPOs and derivatives were outstanding."</p>
+                            <p class="font-bold text-navy-900">- Certified Financial Planner, Delhi</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CONSULTANCY PAGE ================= -->
+        <section id="consultancy" class="section-content">
+            <div class="bg-navy-800 text-white py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h1 class="text-3xl md:text-4xl font-bold mb-4">Consultancy Services</h1>
+                    <p class="text-navy-100 text-lg max-w-2xl">Specialized support for Mutual Fund Distributors to ensure seamless compliance, robust operations, and business growth.</p>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-12">
+                <div class="bg-white rounded-lg shadow-sm p-8 border-t-4 border-navy-800 flex items-start">
+                    <div class="bg-navy-50 p-3 rounded-full mr-6 hidden md:block">
+                         <svg class="w-8 h-8 text-navy-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-navy-800 mb-3">Compliance & Documentation</h2>
+                        <p class="text-gray-600 mb-4 leading-relaxed">Navigating the regulatory landscape of AMFI and SEBI can be daunting. We take the burden off your shoulders by managing all necessary documentation and filings.</p>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
+                            <li class="flex items-center"><span class="w-2 h-2 bg-navy-600 rounded-full mr-2"></span>ARN Registration & Renewal Assistance</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-navy-600 rounded-full mr-2"></span>KYC Norms & Implementation</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-navy-600 rounded-full mr-2"></span>Mandatory Disclosure Filings</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-navy-600 rounded-full mr-2"></span>Due Diligence Report Preparation</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-sm p-8 border-t-4 border-navy-800 flex items-start">
+                    <div class="bg-navy-50 p-3 rounded-full mr-6 hidden md:block">
+                        <svg class="w-8 h-8 text-navy-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-2xl font-bold text-navy-800 mb-3">Operational Guidance</h2>
+                        <p class="text-gray-600 mb-4 leading-relaxed">Efficiency is key to scaling your advisory practice. We analyze your current workflow and implement best practices to streamline your back-office operations.</p>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-gray-700">
+                            <li class="flex items-center"><span class="w-2 h-2 bg-navy-600 rounded-full mr-2"></span>Platform Onboarding (BSE STAR MF)</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-navy-600 rounded-full mr-2"></span>Transaction Processing Workflows</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-navy-600 rounded-full mr-2"></span>Client Data Management Systems</li>
+                            <li class="flex items-center"><span class="w-2 h-2 bg-navy-600 rounded-full mr-2"></span>Digital Onboarding Solutions</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-navy-900 text-white rounded-lg p-8 text-center mt-12">
+                    <h3 class="text-2xl font-bold mb-4">Need Personalized Support?</h3>
+                    <p class="mb-6 text-navy-100">Contact us today to schedule a consultation regarding your practice's specific needs.</p>
+                    <button onclick="navigateTo('about')" class="bg-white text-navy-900 font-bold py-3 px-8 rounded hover:bg-gray-100 transition">Get in Touch</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= COURSES PAGE ================= -->
+        <section id="courses" class="section-content">
+            <div class="bg-navy-50 py-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <h1 class="text-4xl font-bold text-navy-800 mb-4">Key Learnings</h1>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">Elevate your financial expertise with specialized training programs designed for MFDs, students, and financial enthusiasts.</p>
+                </div>
+            </div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+                    <!-- Feature Items -->
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
+                        <div class="bg-navy-50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-navy-800 font-bold">ET</div>
+                        <h3 class="font-bold text-navy-800 mb-2">Expert-Led Training</h3>
+                        <p class="text-sm text-gray-500">Delivered by Chidrup Jain with 20+ years of experience.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
+                        <div class="bg-navy-50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-navy-800 font-bold">PC</div>
+                        <h3 class="font-bold text-navy-800 mb-2">Practical Certification</h3>
+                        <p class="text-sm text-gray-500">Aligned with NISM standards and industry needs.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
+                        <div class="bg-navy-50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-navy-800 font-bold">HL</div>
+                        <h3 class="font-bold text-navy-800 mb-2">Hybrid Learning</h3>
+                        <p class="text-sm text-gray-500">Physical workshops and digital sessions available.</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 text-center">
+                        <div class="bg-navy-50 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4 text-navy-800 font-bold">M</div>
+                        <h3 class="font-bold text-navy-800 mb-2">Mentorship</h3>
+                        <p class="text-sm text-gray-500">Post-training support for implementation.</p>
+                    </div>
+                </div>
+
+                <h2 class="text-3xl font-bold text-navy-800 mb-10">Our Programs</h2>
+                <div class="space-y-8">
+                    <div class="flex flex-col md:flex-row bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition">
+                        <div class="md:w-1/3 bg-navy-800 p-8 flex flex-col justify-center text-white">
+                            <h3 class="text-2xl font-bold mb-2">Wealth Management Masterclass</h3>
+                            <span class="inline-block bg-navy-700 text-xs px-2 py-1 rounded w-fit mb-4">Advanced Level</span>
+                            <p class="text-navy-200 text-sm">Asset allocation, portfolio construction, and risk management.</p>
+                        </div>
+                        <div class="md:w-2/3 p-8">
+                            <h4 class="font-bold text-lg text-navy-800 mb-3">What You Will Learn:</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-600">
+                                <ul class="space-y-2"><li>• Strategic vs. Tactical Asset Allocation</li><li>• Evaluating Client Risk Profiles</li></ul>
+                                <ul class="space-y-2"><li>• Tax Efficient Investing</li><li>• Goal-based Financial Planning</li></ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col md:flex-row bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition">
+                        <div class="md:w-1/3 bg-navy-800 p-8 flex flex-col justify-center text-white">
+                            <h3 class="text-2xl font-bold mb-2">Derivatives & Equity</h3>
+                            <span class="inline-block bg-navy-700 text-xs px-2 py-1 rounded w-fit mb-4">Intermediate Level</span>
+                            <p class="text-navy-200 text-sm">Mechanics of Futures & Options and direct equity analysis.</p>
+                        </div>
+                        <div class="md:w-2/3 p-8">
+                            <h4 class="font-bold text-lg text-navy-800 mb-3">What You Will Learn:</h4>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-600">
+                                <ul class="space-y-2"><li>• Futures Pricing & Hedging</li><li>• Options Strategies (Calls & Puts)</li></ul>
+                                <ul class="space-y-2"><li>• Fundamental Analysis of Stocks</li><li>• Risk Management in Trading</li></ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= CALCULATOR PAGE ================= -->
+        <section id="calculators" class="section-content">
+            <div class="min-h-screen bg-gray-50 py-12">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-10">
+                        <h1 class="text-3xl font-bold text-navy-800 mb-2">Financial Calculators</h1>
+                        <p class="text-gray-600">Plan your investments and future goals with precision.</p>
+                    </div>
+
+                    <!-- Calculator Tabs -->
+                    <div class="flex justify-center gap-4 mb-10">
+                        <button onclick="setCalcMode('SIP')" id="tab-SIP" class="px-6 py-3 rounded-full font-semibold bg-navy-800 text-white shadow-lg transition">SIP Calculator</button>
+                        <button onclick="setCalcMode('LUMPSUM')" id="tab-LUMPSUM" class="px-6 py-3 rounded-full font-semibold bg-white text-gray-600 hover:bg-gray-100 transition">Lumpsum</button>
+                    </div>
+
+                    <div class="flex flex-col lg:flex-row gap-8">
+                        <!-- Inputs -->
+                        <div class="lg:w-1/3 bg-white p-8 rounded-lg shadow-sm border border-gray-200 h-fit">
+                            <h2 class="text-xl font-bold text-navy-800 mb-6" id="calc-title">SIP Details</h2>
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2" id="label-amt">Monthly Investment (₹)</label>
+                                    <input type="number" id="inp-amt" class="w-full bg-white p-3 border border-gray-300 rounded focus:ring-2 focus:ring-navy-800 outline-none" value="5000">
+                                    <input type="range" id="rng-amt" min="500" max="100000" step="500" value="5000" class="w-full mt-2 accent-navy-800">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Expected Return Rate (p.a %)</label>
+                                    <input type="number" id="inp-rate" class="w-full bg-white p-3 border border-gray-300 rounded focus:ring-2 focus:ring-navy-800 outline-none" value="12">
+                                    <input type="range" id="rng-rate" min="1" max="30" step="0.5" value="12" class="w-full mt-2 accent-navy-800">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Time Period (Years)</label>
+                                    <input type="number" id="inp-years" class="w-full bg-white p-3 border border-gray-300 rounded focus:ring-2 focus:ring-navy-800 outline-none" value="10">
+                                    <input type="range" id="rng-years" min="1" max="40" step="1" value="10" class="w-full mt-2 accent-navy-800">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Results -->
+                        <div class="lg:w-2/3 space-y-8">
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                                    <p class="text-gray-500 text-sm font-medium">Total Invested</p>
+                                    <p class="text-2xl font-bold text-navy-800" id="res-invested">₹0</p>
+                                </div>
+                                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                                    <p class="text-gray-500 text-sm font-medium">Est. Returns</p>
+                                    <p class="text-2xl font-bold text-green-600" id="res-returns">₹0</p>
+                                </div>
+                                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
+                                    <p class="text-navy-800 text-sm font-medium">Total Value</p>
+                                    <p class="text-2xl font-bold text-navy-900" id="res-total">₹0</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Simple CSS Bar Chart -->
+                            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200 h-80 flex flex-col">
+                                <h3 class="text-sm font-bold text-gray-500 mb-4 text-center">Growth Projection (Yearly)</h3>
+                                <div class="flex-grow flex items-end justify-between gap-1" id="chart-container">
+                                    <!-- Bars injected via JS -->
+                                </div>
+                            </div>
+                            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded-r">
+                                <p class="text-sm text-blue-800"><strong>Note:</strong> These calculations are for illustrative purposes only. Returns are subject to market risks.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= ABOUT PAGE ================= -->
+        <section id="about" class="section-content">
+            <div class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row gap-12 items-start mb-16">
+                    <div class="md:w-1/3 w-full">
+                        <div class="aspect-[3/4] bg-gray-200 rounded-lg shadow-lg overflow-hidden relative">
+                             <img src="chidrup-jain.png" onerror="this.src='https://via.placeholder.com/300x400?text=Chidrup+Jain'" alt="Chidrup Jain" class="w-full h-full object-cover" />
+                             <div class="absolute bottom-0 left-0 right-0 bg-navy-900 bg-opacity-90 p-4 text-white">
+                                <h2 class="text-xl font-bold">Chidrup Jain</h2>
+                                <p class="text-sm text-gray-300">Founder & Director</p>
+                             </div>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 w-full">
+                        <h1 class="text-4xl font-bold text-navy-800 mb-6">Founder</h1>
+                        <div class="space-y-4 text-gray-600 leading-relaxed text-lg">
+                            <p>Chidrup Jain is a seasoned financial professional with over 20 years of rich experience in the financial services industry. As the Director and Founder of The Excelist, he has dedicated his career to empowering Mutual Fund Distributors (MFDs) and investors alike through consultancy and education.</p>
+                            <p>His deep domain expertise spans across Financial Planning, Wealth Management, Mutual Funds, Equity, Derivatives, Commodities, and SME IPOs. Chidrup is not just a consultant but a mentor who believes in the power of financial literacy.</p>
+                            <ul class="list-disc pl-6 space-y-2 text-navy-900 font-medium">
+                                <li>Managed operations for BSE STAR MF in Rajasthan.</li>
+                                <li>Personally trained over 3,500 IFAs.</li>
+                                <li>Led major Investment Awareness Workshops (IAPs) as a recognized NISM CPE & SEBI SMART Trainer.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact -->
+                <div class="bg-navy-50 p-8 rounded-lg">
+                    <h2 class="text-2xl font-bold text-navy-800 mb-6 text-center">Contact Us</h2>
+                    <div class="flex flex-col lg:flex-row gap-8">
+                        <div class="lg:w-1/3 space-y-4 text-center lg:text-left">
+                            <div class="bg-white p-4 rounded shadow-sm"><p class="font-bold">Email</p><p class="text-gray-600">info@theexcelist.com</p></div>
+                            <div class="bg-white p-4 rounded shadow-sm"><p class="font-bold">Phone</p><p class="text-gray-600">+91 94144 28749</p></div>
+                        </div>
+                        <div class="lg:w-2/3">
+                            <form onsubmit="event.preventDefault(); alert('Message sent successfully!');" class="space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <input type="text" placeholder="Name" class="p-3 rounded border w-full" required>
+                                    <input type="email" placeholder="Email" class="p-3 rounded border w-full" required>
+                                </div>
+                                <textarea placeholder="Message" rows="4" class="p-3 rounded border w-full" required></textarea>
+                                <button type="submit" class="bg-navy-800 text-white px-6 py-3 rounded font-bold hover:bg-navy-900 w-full">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= LEGAL PAGES (Placeholder content) ================= -->
+        <section id="privacy" class="section-content">
+             <div class="max-w-4xl mx-auto px-4 py-16">
+                 <h1 class="text-3xl font-bold text-navy-800 mb-4">Privacy Policy</h1>
+                 <p class="text-gray-700">We respect your privacy. [Full privacy policy content goes here...]</p>
+             </div>
+        </section>
+        <section id="terms" class="section-content">
+             <div class="max-w-4xl mx-auto px-4 py-16">
+                 <h1 class="text-3xl font-bold text-navy-800 mb-4">Terms of Use</h1>
+                 <p class="text-gray-700">[Full terms of use content goes here...]</p>
+             </div>
+        </section>
+        <section id="refund" class="section-content">
+             <div class="max-w-4xl mx-auto px-4 py-16">
+                 <h1 class="text-3xl font-bold text-navy-800 mb-4">Refund Policy</h1>
+                 <p class="text-gray-700">All sales are final. [Full refund policy content goes here...]</p>
+             </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-white mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">THE EXCELIST</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">Empowering Mutual Fund Distributors and financial professionals through expert compliance consultancy and world-class education.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-300">
+                        <li><button onclick="navigateTo('home')" class="hover:text-white">Home</button></li>
+                        <li><button onclick="navigateTo('consultancy')" class="hover:text-white">Consultancy Services</button></li>
+                        <li><button onclick="navigateTo('courses')" class="hover:text-white">Key Learnings</button></li>
+                        <li><button onclick="navigateTo('privacy')" class="hover:text-white">Privacy Policy</button></li>
+                        <li><button onclick="navigateTo('terms')" class="hover:text-white">Terms of Use</button></li>
+                        <li><button onclick="navigateTo('refund')" class="hover:text-white">Refund Policy</button></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Contact Us</h4>
+                    <p class="text-sm text-gray-300">Email: info@theexcelist.com</p>
+                    <p class="text-sm text-gray-300">Phone: +91 94144 28749</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2024 The Excelist. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // === NAVIGATION LOGIC ===
+        function navigateTo(pageId) {
+            // Hide all sections
+            document.querySelectorAll('.section-content').forEach(el => el.classList.remove('active'));
+            // Show target section
+            document.getElementById(pageId).classList.add('active');
+            
+            // Update Header Styling
+            document.querySelectorAll('.nav-link').forEach(el => {
+                if(el.dataset.target === pageId || (pageId === 'calculators' && el.dataset.target === 'calculators')) {
+                    el.classList.add('text-navy-800', 'border-b-2', 'border-navy-800');
+                    el.classList.remove('text-gray-600');
+                } else {
+                    el.classList.remove('text-navy-800', 'border-b-2', 'border-navy-800');
+                    el.classList.add('text-gray-600');
+                }
+            });
+            window.scrollTo(0,0);
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // === CALCULATOR LOGIC ===
+        let calcMode = 'SIP'; // 'SIP' or 'LUMPSUM'
+
+        function setCalcMode(mode) {
+            calcMode = mode;
+            // Update Buttons
+            document.getElementById('tab-SIP').className = mode === 'SIP' 
+                ? 'px-6 py-3 rounded-full font-semibold bg-navy-800 text-white shadow-lg transition' 
+                : 'px-6 py-3 rounded-full font-semibold bg-white text-gray-600 hover:bg-gray-100 transition';
+            document.getElementById('tab-LUMPSUM').className = mode === 'LUMPSUM' 
+                ? 'px-6 py-3 rounded-full font-semibold bg-navy-800 text-white shadow-lg transition' 
+                : 'px-6 py-3 rounded-full font-semibold bg-white text-gray-600 hover:bg-gray-100 transition';
+            
+            // Update Label
+            document.getElementById('label-amt').textContent = mode === 'SIP' ? 'Monthly Investment (₹)' : 'Total Investment (₹)';
+            document.getElementById('calc-title').textContent = mode === 'SIP' ? 'SIP Details' : 'Lumpsum Details';
+
+            // Reset ranges slightly for UX
+            if(mode === 'SIP') {
+                updateInputs(5000, 12, 10);
+                document.getElementById('rng-amt').max = 100000;
+            } else {
+                updateInputs(100000, 12, 10);
+                document.getElementById('rng-amt').max = 5000000;
+            }
+            calculate();
+        }
+
+        function updateInputs(amt, rate, years) {
+            document.getElementById('inp-amt').value = amt; document.getElementById('rng-amt').value = amt;
+            document.getElementById('inp-rate').value = rate; document.getElementById('rng-rate').value = rate;
+            document.getElementById('inp-years').value = years; document.getElementById('rng-years').value = years;
+        }
+
+        function calculate() {
+            const P = parseFloat(document.getElementById('inp-amt').value);
+            const R = parseFloat(document.getElementById('inp-rate').value);
+            const N = parseFloat(document.getElementById('inp-years').value);
+
+            let totalInvested = 0;
+            let totalValue = 0;
+            let yearlyData = [];
+
+            if (calcMode === 'SIP') {
+                const i = R / 12 / 100;
+                const months = N * 12;
+                totalValue = P * ((Math.pow(1 + i, months) - 1) / i) * (1 + i);
+                totalInvested = P * months;
+                
+                // Gen chart data
+                for(let yr=1; yr<=N; yr++) {
+                    const m = yr * 12;
+                    const val = P * ((Math.pow(1 + i, m) - 1) / i) * (1 + i);
+                    yearlyData.push(val);
+                }
+            } else {
+                totalValue = P * Math.pow(1 + R / 100, N);
+                totalInvested = P;
+
+                for(let yr=1; yr<=N; yr++) {
+                    yearlyData.push(P * Math.pow(1 + R / 100, yr));
+                }
+            }
+
+            // Update Text
+            const estReturns = totalValue - totalInvested;
+            document.getElementById('res-invested').textContent = formatCurrency(totalInvested);
+            document.getElementById('res-returns').textContent = formatCurrency(estReturns);
+            document.getElementById('res-total').textContent = formatCurrency(totalValue);
+
+            // Render Simple Chart
+            renderChart(yearlyData);
+        }
+
+        function renderChart(data) {
+            const container = document.getElementById('chart-container');
+            container.innerHTML = '';
+            const maxVal = data[data.length - 1];
+            
+            data.forEach((val, idx) => {
+                const heightPercent = (val / maxVal) * 100;
+                const bar = document.createElement('div');
+                bar.style.height = `${heightPercent}%`;
+                bar.className = 'w-full bg-navy-800 rounded-t opacity-80 hover:opacity-100 transition-opacity relative group';
+                
+                // Tooltip
+                const tooltip = document.createElement('div');
+                tooltip.className = 'absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 bg-black text-white text-xs px-2 py-1 rounded hidden group-hover:block whitespace-nowrap z-10';
+                tooltip.textContent = `Year ${idx+1}: ${formatCurrency(val)}`;
+                bar.appendChild(tooltip);
+
+                container.appendChild(bar);
+            });
+        }
+
+        function formatCurrency(num) {
+            return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(num);
+        }
+
+        // Event Listeners for Calculator
+        ['inp-amt', 'rng-amt', 'inp-rate', 'rng-rate', 'inp-years', 'rng-years'].forEach(id => {
+            document.getElementById(id).addEventListener('input', (e) => {
+                // Sync pair
+                const pairId = id.startsWith('inp') ? id.replace('inp', 'rng') : id.replace('rng', 'inp');
+                document.getElementById(pairId).value = e.target.value;
+                calculate();
+            });
+        });
+
+        // Initialize
+        calculate();
+
+    </script>
+</body>
 </html>
